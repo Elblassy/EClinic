@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_sign"
+    app:startDestination="@id/mobileNumber">
+
+
+    <fragment
+        android:id="@+id/activateMobile"
+        android:name="app.iflatco.eclinic.ui.activate_mobile.ActivateMobile"
+        android:label="activate_mobile_fragment"
+        tools:layout="@layout/activate_mobile_fragment" >
+        <action
+            android:id="@+id/action_activateMobile_to_registerData"
+            app:destination="@id/registerData"
+            app:popUpTo="@id/activateMobile"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/mobileNumber"
+        android:name="app.iflatco.eclinic.ui.mobile_number.MobileNumber"
+        android:label="MobileNumber"
+        tools:layout="@layout/mobile_number_fragment">
+        <action
+            android:id="@+id/action_mobileNumber_to_activateMobile"
+            app:destination="@id/activateMobile"
+            app:popUpTo="@id/mobileNumber"
+            app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/action_mobileNumber_to_registerData"
+            app:destination="@id/registerData" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerData"
+        android:name="app.iflatco.eclinic.ui.registerdata.RegisterData"
+        android:label="register_data_fragment"
+        tools:layout="@layout/register_data_fragment" />
+</navigation>

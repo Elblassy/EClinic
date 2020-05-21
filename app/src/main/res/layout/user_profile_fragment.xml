@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/bg_color"
+    tools:context=".ui.profile.UserProfile">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/elblasy"
+        android:layout_margin="18dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:padding="12dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/profile_rounded_bg"
+        android:translationX="18dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/user_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Muhammed Elbalsy"
+        android:textColor="@color/colorAccent"
+        android:textSize="15pt"
+        android:textStyle="bold"
+        android:layout_marginVertical="12dp"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@+id/guid" />
+
+    <TextView
+        android:id="@+id/gender"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="12dp"
+        android:gravity="center"
+        android:text="Male"
+        android:textSize="13pt"
+        android:layout_marginStart="12dp"
+        app:layout_constraintStart_toStartOf="@id/guid2"
+        app:layout_constraintTop_toBottomOf="@+id/user_name" />
+
+
+    <TextView
+        android:id="@+id/age"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="22 years"
+        android:textSize="13pt"
+        android:layout_marginStart="12dp"
+        app:layout_constraintStart_toStartOf="@id/guid2"
+        app:layout_constraintTop_toBottomOf="@+id/gender" />
+
+    <TextView
+        android:id="@+id/height"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="186 cm"
+        android:textSize="13pt"
+        android:layout_marginStart="12dp"
+        app:layout_constraintStart_toStartOf="@id/guid2"
+        app:layout_constraintTop_toBottomOf="@+id/age" />
+
+    <TextView
+        android:id="@+id/weight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="92 kg"
+        android:textSize="13pt"
+        android:layout_marginStart="12dp"
+        app:layout_constraintStart_toStartOf="@id/guid2"
+        app:layout_constraintTop_toBottomOf="@+id/height" />
+
+    <Button
+        android:id="@+id/appointment"
+        android:layout_width="240dp"
+        android:layout_height="65dp"
+        android:background="@drawable/bg_btn"
+        android:padding="8dp"
+        android:text="my appointment"
+        android:textColor="#FFF"
+        android:textSize="11pt"
+        android:layout_margin="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/guid2"
+        app:layout_constraintTop_toBottomOf="@+id/weight" />
+
+    <Button
+        android:id="@+id/old_visits"
+        android:layout_width="240dp"
+        android:layout_height="65dp"
+        android:background="@drawable/bg_btn"
+        android:padding="8dp"
+        android:text="my old visits"
+        android:textColor="#FFF"
+        android:textSize="11pt"
+        android:layout_margin="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/guid2"
+        app:layout_constraintTop_toBottomOf="@+id/appointment" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".2" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guid2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".1" />
+</androidx.constraintlayout.widget.ConstraintLayout>

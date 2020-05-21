@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1017592029598",
+    "firebase_url": "https://eclinic-ecdb2.firebaseio.com",
+    "project_id": "eclinic-ecdb2",
+    "storage_bucket": "eclinic-ecdb2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1017592029598:android:8631d7df068ba9250ef68f",
+        "android_client_info": {
+          "package_name": "app.iflatco.eclinic"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1017592029598-2c0i36se0im93dbiu4kd8k59b0ne5742.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "app.iflatco.eclinic",
+            "certificate_hash": "2f14ede2dffda04283eab395981e11bce6b1b15a"
+          }
+        },
+        {
+          "client_id": "1017592029598-asmofuhaueeeetm1oc9mgrbfj8fttlom.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA1ouK5tuuiNCzb2Oht6vBkRrqj_MdTDk4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1017592029598-asmofuhaueeeetm1oc9mgrbfj8fttlom.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
