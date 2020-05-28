@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">eClinic</string>
+    <string name="mobile_title">أدخل رقم هاتفك</string>
+    <string name="number_btn">التالي</string>
+    <string name="enter_code_title">أدخل الرمز الذي سوف يصل اليك</string>
+    <string name="verify">تأكيد</string>
+    <string name="your_info_title">معلوماتك</string>
+    <string name="gender">جنسك</string>
+    <string name="submit">تأكيد</string>
+    <string name="send_code_again">"اذا لم يصلك الكود قم بالضغط على "</string>
+    <string name="send_again">ارسل مجددًا</string>
+    <string name="title_settings">الاعدادات</string>
+    <string name="title_profile">صفحتي</string>
+    <string name="title_contact">تواصل مع طبيب</string>
+    <string name="choose_specialties">اختار تخصص الطبيب</string>
+    <string name="edit_profile_title">تعديل بيناتك</string>
+    <string name="logout">تسجيل الخروج</string>
+    <string name="my_appointment">مواعيدي</string>
+    <string name="my_old_visit">زياراتي السابقة</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_finish_appointment">تم حجز الموعد بنجاح</string>
+    <string name="years_title">سنين</string>
+    <string name="weight_title">كجم</string>
+    <string name="height_title">سم</string>
+
+    <string name="enter_num_toast">من فضلك ادخل رقم صحيح</string>
+    <string name="enter_num_edit">+2 ادخل رقم هاتفك</string>
+
+    <string name="first_name">اسمك الاول</string>
+    <string name="last_name">اسم العائلة</string>
+    <string name="birth">تاريخ ميلادك</string>
+    <string name="weight">وزنك</string>
+    <string name="height">طولك</string>
+    <string name="day">Choose Day</string>
+
+</resources>

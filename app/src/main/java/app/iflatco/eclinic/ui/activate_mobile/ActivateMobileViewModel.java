@@ -1,8 +1,6 @@
 package app.iflatco.eclinic.ui.activate_mobile;
 
-import android.app.Activity;
 import android.app.Application;
-import android.content.Context;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -10,18 +8,24 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
 import com.google.android.gms.tasks.TaskExecutors;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
-import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
 
+import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
+
+import app.iflatco.eclinic.data.ClientServer;
+import app.iflatco.eclinic.models.DataModel;
+import app.iflatco.eclinic.models.ResponseModel;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ActivateMobileViewModel extends AndroidViewModel {
 
     MutableLiveData<String> mVerificationId;
     MutableLiveData<PhoneAuthProvider.OnVerificationStateChangedCallbacks> mCallbacks;
     MutableLiveData<Boolean> success;
+    MutableLiveData<ResponseModel> responseModelMutableLiveData;
 
     private static final String TAG = "ActivateMobileViewModel";
     private Application application;
@@ -33,6 +37,7 @@ public class ActivateMobileViewModel extends AndroidViewModel {
         mCallbacks = new MutableLiveData<>();
         mVerificationId = new MutableLiveData<>();
         success = new MutableLiveData<>();
+        responseModelMutableLiveData = new MutableLiveData<>();
     }
 
 
@@ -47,6 +52,23 @@ public class ActivateMobileViewModel extends AndroidViewModel {
         Log.e("Mobile", mobile);
     }
 
+    void checkNumber(HashMap<String, String> sign) {
+        ClientServer.getINSTANCE().signIn(sign).enqueue(new Callback<ResponseModel>() {
+            @Override
+            public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
+                if (response.code() == 200) {
+                    responseModelMutableLiveData.setValue(response.body());
+                } else if (response.code() == 401) {
+                    responseModelMutableLiveData.setValue(new ResponseModel(false, "", new DataModel()));
+                    Log.d(TAG, "onResponse: " + response.message());
+                }
+            }
 
+            @Override
+            public void onFailure(Call<ResponseModel> call, Throwable t) {
+                Log.d(TAG, "onFailure: " + t.getMessage());
+            }
+        });
+    }
 
 }

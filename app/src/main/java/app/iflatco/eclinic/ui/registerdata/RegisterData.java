@@ -24,7 +24,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
-import app.iflatco.eclinic.MainActivity;
+import app.iflatco.eclinic.ui.main.MainActivity;
 import app.iflatco.eclinic.R;
 import app.iflatco.eclinic.databinding.RegisterDataFragmentBinding;
 import app.iflatco.eclinic.models.DataModel;

@@ -54,7 +54,7 @@
             android:paddingHorizontal="12dp"
             android:textSize="9pt"
             android:background="@drawable/edit_border"
-            android:hint="First Name"
+            android:hint="@string/first_name"
             />
 
         <EditText
@@ -67,7 +67,8 @@
             android:paddingHorizontal="12dp"
             android:textSize="9pt"
             android:background="@drawable/edit_border"
-            android:hint="Last Name" />
+            android:hint="@string/last_name"
+            />
     </LinearLayout>
 
 
@@ -80,7 +81,6 @@
         android:padding="12dp"
         app:layout_constraintVertical_chainStyle="spread_inside"
         app:layout_constraintVertical_weight="1"
-        android:background="@drawable/edit_border"
         android:hint="@string/gender"
         android:gravity="center_vertical"
         app:layout_constraintBottom_toTopOf="@id/birth_date"
@@ -94,7 +94,7 @@
         android:layout_marginTop="12dp"
         android:padding="12dp"
         android:background="@drawable/edit_border"
-        android:hint="Birthdate"
+        android:hint="@string/birth"
         android:textSize="9pt"
         android:focusable="false"
         android:longClickable="false"
@@ -115,7 +115,7 @@
         android:layout_marginTop="12dp"
         android:padding="12dp"
         android:background="@drawable/edit_border"
-        android:hint="your weigth"
+        android:hint="@string/weight"
         android:inputType="numberDecimal"
         android:textSize="9pt"
         app:layout_constraintVertical_chainStyle="spread_inside"
@@ -133,7 +133,7 @@
         android:layout_marginTop="12dp"
         android:padding="12dp"
         android:background="@drawable/edit_border"
-        android:hint="your height"
+        android:hint="@string/height"
         android:textSize="9pt"
         android:inputType="numberDecimal"
         app:layout_constraintVertical_chainStyle="spread_inside"

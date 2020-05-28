@@ -13,4 +13,27 @@
     <string name="title_profile">My profile</string>
     <string name="title_contact">Contact with Dr</string>
     <string name="choose_specialties">Choose Specialty</string>
+    <string name="edit_profile_title">Edit Profile</string>
+    <string name="logout">"Logout "</string>
+    <string name="my_appointment">My appointment</string>
+    <string name="my_old_visit">My old visits</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_finish_appointment">The appointment was booked successfully</string>
+    <string name="years_title"> Years</string>
+    <string name="weight_title">Kg</string>
+    <string name="height_title">Cm</string>
+    <string name="enter_num_toast">Please enter correct number</string>
+    <string name="enter_num_edit">+2 Enter your mobile number</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="birth">Birthdate</string>
+    <string name="weight">Your Weigth</string>
+    <string name="height">Your Height</string>
+
+    <string name="select_cate">Please Select Category first</string>
+    <string name="speciality">Speciality</string>
+    <string name="available_app_title">Available Appointments</string>
+    <string name="day">Choose Day</string>
+
 </resources>

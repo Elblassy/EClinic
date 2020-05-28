@@ -35,7 +35,7 @@
         android:padding="12dp"
         android:inputType="phone"
         android:background="@drawable/edit_border"
-        android:hint="+2 Enter Your mobile number"
+        android:hint="@string/enter_num_edit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guid" />
