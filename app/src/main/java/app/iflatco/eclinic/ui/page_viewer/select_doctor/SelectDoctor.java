@@ -88,7 +88,9 @@ public class SelectDoctor extends Fragment {
             public void onClick(int position) {
                 int id = list.get(position).getDoctorId();
                 Log.d(TAG, "onDoctorSelected: " + id);
-                onDoctorSelected.onClicked(id);
+                onDoctorSelected.onClicked(id,
+                        list.get(position).getFirstName() + " " + list.get(position).getLastName());
+                ;
             }
         });
         binding.recyclerView.setAdapter(selectDoctorAdapter);

@@ -17,7 +17,8 @@
         android:theme="@style/AppTheme"
         android:requestLegacyExternalStorage="true"
         tools:replace="android:supportsRtl">
-        <activity android:name=".ui.page_viewer.DoctorsViewPages"></activity>
+        <activity android:name=".ui.page_viewer.DoctorsViewPages"/>
+        <activity android:name=".ui.appointment_patient.MyAppointment"/>
         <activity android:name=".ui.sign.SignActivity" />
         <activity android:name=".ui.splash.SplashActivity">
             <intent-filter>

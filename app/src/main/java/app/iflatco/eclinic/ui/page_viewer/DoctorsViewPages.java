@@ -91,13 +91,13 @@ public class DoctorsViewPages extends AppCompatActivity implements OnDoctorSelec
     }
 
     @Override
-    public void onClicked(int pos) {
+    public void onClicked(int pos,String name) {
         binding.next.setVisibility(View.VISIBLE);
         binding.prev.setVisibility(View.VISIBLE);
         Log.d(TAG, "onDoctorSelected: " + pos);
         String tag = "android:switcher:" + binding.masterViewPager.getId() + ":" + 1;
         DrAppointment f = (DrAppointment) getSupportFragmentManager().findFragmentByTag(tag);
-        f.setId(pos);
+        f.setData(pos,name);
 
         binding.masterViewPager.setCurrentItem(getItem(1), true);
     }

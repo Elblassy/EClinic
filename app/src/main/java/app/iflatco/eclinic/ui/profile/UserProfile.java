@@ -22,12 +22,12 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.Navigation;
 
 import java.io.File;
 
 import app.iflatco.eclinic.R;
 import app.iflatco.eclinic.databinding.UserProfileFragmentBinding;
+import app.iflatco.eclinic.ui.appointment_patient.MyAppointment;
 import app.iflatco.eclinic.utils.CustomSharedPref;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -56,8 +56,7 @@ public class UserProfile extends Fragment {
         pref = new CustomSharedPref(getContext());
         initView();
 
-        binding.appointment.setOnClickListener(v -> Navigation.findNavController(v)
-                .navigate(R.id.action_navigation_profile_to_myAppointment));
+        binding.appointment.setOnClickListener(v -> startActivity(new Intent(getActivity(), MyAppointment.class)));
 
         binding.profileImage.setOnClickListener(v -> {
             checkPermission();
