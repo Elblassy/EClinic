@@ -1,23 +1,27 @@
 package app.iflatco.eclinic.ui.page_viewer.payment;
 
-import androidx.lifecycle.ViewModelProviders;
-
 import android.content.Context;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import app.iflatco.eclinic.R;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+
+import app.iflatco.eclinic.databinding.PaymentFragmentBinding;
+import app.iflatco.eclinic.utils.CustomSharedPref;
 
 public class Payment extends Fragment {
+    private static final String TAG = "Payment";
 
     private PaymentViewModel mViewModel;
+    private int id;
+    private CustomSharedPref pref;
+    private PaymentFragmentBinding binding;
 
     public static Payment newInstance(Context context) {
         return new Payment();
@@ -26,14 +30,41 @@ public class Payment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.payment_fragment, container, false);
+
+        binding = PaymentFragmentBinding.inflate(inflater, container, false);
+        mViewModel = new ViewModelProvider(this).get(PaymentViewModel.class);
+
+        pref = new CustomSharedPref(getContext());
+
+        binding.confirm.setOnClickListener(v -> {
+            pref.setPrefPending(false);
+            mViewModel.confirmAppointment(pref.getSessionValue("tokenId"), id);
+            Log.d(TAG, "onCreateView: " + pref.getSessionBoolean("pending"));
+        });
+
+        return binding.getRoot();
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.d(TAG, "onResume: " + id);
+        pref.setPrefSlotId(id);
+        pref.setPrefPending(true);
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(PaymentViewModel.class);
-        // TODO: Use the ViewModel
+    public void onPause() {
+        super.onPause();
+        Log.d(TAG, "onResume: " + "Here");
+        if (pref.getSessionBoolean("pending")) {
+            mViewModel.cancelAppointment(pref.getSessionValue("tokenId"), pref.getSlotId());
+        }
     }
 
+
+    public void setId(int id) {
+        this.id = id;
+    }
 }

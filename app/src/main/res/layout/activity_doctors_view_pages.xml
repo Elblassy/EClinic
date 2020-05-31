@@ -34,18 +34,6 @@
         app:layout_constraintTop_toBottomOf="@id/guid" />
 
     <ImageView
-        android:id="@+id/next"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/btn_nxt_prev"
-        app:srcCompat="@drawable/ic_chevron_right_24dp"
-        android:layout_margin="24dp"
-        android:textColor="@color/colorAccent"
-        android:elevation="8dp"
-        app:layout_constraintBottom_toTopOf="@id/guid"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <ImageView
         android:id="@+id/prev"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -53,7 +41,6 @@
         app:srcCompat="@drawable/ic_chevron_left_24dp"
         android:layout_margin="24dp"
         android:elevation="8dp"
-
         android:textColor="@color/colorAccent"
         app:layout_constraintBottom_toTopOf="@id/guid"
         app:layout_constraintStart_toStartOf="parent" />

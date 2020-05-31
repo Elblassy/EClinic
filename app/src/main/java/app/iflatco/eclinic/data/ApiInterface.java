@@ -5,6 +5,7 @@ import java.util.HashMap;
 import app.iflatco.eclinic.models.CateResponse;
 import app.iflatco.eclinic.models.DrAvailableSlotsResponse;
 import app.iflatco.eclinic.models.DrResponse;
+import app.iflatco.eclinic.models.ResponseAppointment;
 import app.iflatco.eclinic.models.ResponseModel;
 import app.iflatco.eclinic.models.UserModel;
 import app.iflatco.eclinic.models.DoctorDaysResponse;
@@ -54,4 +55,18 @@ interface ApiInterface {
     @POST("slots/getOpenSlots")
     Call<DrAvailableSlotsResponse> getAvailableSlots(@Header("Authorization") String authToken,
                                                      @Body HashMap<String, Object> doctorId);
+    @Headers({"Content-Type: application/json;charset=UTF-8"})
+    @POST("appointments/addAppointment")
+    Call<ResponseAppointment> pendingAppointment(@Header("Authorization") String authToken,
+                                                 @Body HashMap<String, Object> doctorId);
+
+    @Headers({"Content-Type: application/json;charset=UTF-8"})
+    @PATCH("appointments/confirmAppointment")
+    Call<ResponseAppointment> confirmAppointment(@Header("Authorization") String authToken,
+                                                 @Body HashMap<String, Object> doctorId);
+
+    @Headers({"Content-Type: application/json;charset=UTF-8"})
+    @PATCH("appointments/cancelAppointment")
+    Call<ResponseAppointment> cancelAppointment(@Header("Authorization") String authToken,
+                                                 @Body HashMap<String, Object> doctorId);
 }

@@ -7,6 +7,7 @@ import app.iflatco.eclinic.models.CateResponse;
 import app.iflatco.eclinic.models.DoctorDaysResponse;
 import app.iflatco.eclinic.models.DrAvailableSlotsResponse;
 import app.iflatco.eclinic.models.DrResponse;
+import app.iflatco.eclinic.models.ResponseAppointment;
 import app.iflatco.eclinic.models.ResponseModel;
 import app.iflatco.eclinic.models.UserModel;
 import okhttp3.MultipartBody;
@@ -76,4 +77,15 @@ public class ClientServer {
         return apiInterface.getAvailableSlots(authToken, doctorId);
     }
 
+    public Call<ResponseAppointment> pendingAppointment(String authToken, HashMap<String, Object> doctorId) {
+        return apiInterface.pendingAppointment(authToken, doctorId);
+    }
+
+
+    public Call<ResponseAppointment> confirmAppointment(String authToken, HashMap<String, Object> doctorId) {
+        return apiInterface.confirmAppointment(authToken, doctorId);
+    }
+    public Call<ResponseAppointment> cancelAppointment(String authToken, HashMap<String, Object> doctorId) {
+        return apiInterface.cancelAppointment(authToken, doctorId);
+    }
 }

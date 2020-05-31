@@ -10,6 +10,7 @@ import java.util.HashMap;
 import app.iflatco.eclinic.data.ClientServer;
 import app.iflatco.eclinic.models.DoctorDaysResponse;
 import app.iflatco.eclinic.models.DrAvailableSlotsResponse;
+import app.iflatco.eclinic.models.ResponseAppointment;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -18,11 +19,14 @@ public class DrAppointmentViewModel extends ViewModel {
     private static final String TAG = "DrAppointmentViewModel";
 
     MutableLiveData<DoctorDaysResponse> drDaysMutableLiveData;
+    MutableLiveData<ResponseAppointment> responseAppointmentMutableLiveData;
     MutableLiveData<DrAvailableSlotsResponse> drSlotsMutableLiveData;
 
     public DrAppointmentViewModel() {
         drDaysMutableLiveData = new MutableLiveData<>();
         drSlotsMutableLiveData = new MutableLiveData<>();
+        responseAppointmentMutableLiveData = new MutableLiveData<>();
+
     }
 
     void getDrDays(String auth, int id) {
@@ -70,5 +74,30 @@ public class DrAppointmentViewModel extends ViewModel {
 
 
     }
+
+    void pendingAppointment(String auth, int id, String date) {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("slot_id", id);
+        map.put("date", date);
+
+        ClientServer.getINSTANCE().pendingAppointment("Bearer " + auth, map).enqueue(new Callback<ResponseAppointment>() {
+            @Override
+            public void onResponse(Call<ResponseAppointment> call, Response<ResponseAppointment> response) {
+                if (response.code() == 201) {
+                    responseAppointmentMutableLiveData.setValue(response.body());
+                } else {
+                    Log.d(TAG, "pendingAppointment response: " + response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseAppointment> call, Throwable t) {
+                Log.d(TAG, "onFailure: " + t.getMessage());
+            }
+        });
+
+
+    }
+
 
 }

@@ -35,10 +35,20 @@ public class CustomSharedPref {
         return pref.getString(key, "none");
     }
 
+    public int getSlotId() {
+        return pref.getInt("slotId", -1);
+    }
+
     public void setPrefMobile(String mobile) {
         editor.putString("mobile", mobile);
         editor.apply();
     }
+
+    public void setPrefSlotId(int slotId) {
+        editor.putInt("slotId", slotId);
+        editor.apply();
+    }
+
 
     public void setPrefFirstName(String firstName) {
         editor.putString("firstName", firstName);
@@ -87,6 +97,11 @@ public class CustomSharedPref {
 
     public void setPrefTokenId(String tokenId) {
         editor.putString("tokenId", tokenId);
+        editor.apply();
+    }
+
+    public void setPrefPending(boolean pending) {
+        editor.putBoolean("pending", pending);
         editor.apply();
     }
 
