@@ -87,6 +87,19 @@ public class Chat extends AppCompatActivity {
         mSocket.emit("joinUserToRoom", getIntent().getStringExtra("room_id"));
         mSocket.connect();
 
+
+        initView();
+    }
+
+    private void initView() {
+        LinearLayoutManager manager = new LinearLayoutManager(this);
+        binding.toolbarTitle.setText(getIntent().getStringExtra("doctor_name"));
+        manager.setStackFromEnd(true);
+        binding.layout.recyclerView.setLayoutManager(manager);
+        binding.layout.recyclerView.setNestedScrollingEnabled(false);
+        chatAdapter = new ChatAdapter(this, chatModelList);
+        binding.layout.recyclerView.setAdapter(chatAdapter);
+
         binding.layout.send.setVisibility(View.GONE);
 
         binding.layout.editText.addTextChangedListener(new TextWatcher() {
@@ -125,16 +138,5 @@ public class Chat extends AppCompatActivity {
 
         });
 
-        initView();
-    }
-
-    private void initView() {
-        LinearLayoutManager manager = new LinearLayoutManager(this);
-        binding.toolbarTitle.setText(getIntent().getStringExtra("doctor_name"));
-        manager.setStackFromEnd(true);
-        binding.layout.recyclerView.setLayoutManager(manager);
-        binding.layout.recyclerView.setNestedScrollingEnabled(false);
-        chatAdapter = new ChatAdapter(this, chatModelList);
-        binding.layout.recyclerView.setAdapter(chatAdapter);
     }
 }

@@ -18,36 +18,13 @@ import retrofit2.Response;
 public class DrAppointmentViewModel extends ViewModel {
     private static final String TAG = "DrAppointmentViewModel";
 
-    MutableLiveData<DoctorDaysResponse> drDaysMutableLiveData;
     MutableLiveData<ResponseAppointment> responseAppointmentMutableLiveData;
     MutableLiveData<DrAvailableSlotsResponse> drSlotsMutableLiveData;
 
     public DrAppointmentViewModel() {
-        drDaysMutableLiveData = new MutableLiveData<>();
         drSlotsMutableLiveData = new MutableLiveData<>();
         responseAppointmentMutableLiveData = new MutableLiveData<>();
 
-    }
-
-    void getDrDays(String auth, int id) {
-        HashMap<String, Integer> map = new HashMap<>();
-        map.put("doctor_id", id);
-
-        ClientServer.getINSTANCE().getDoctorDays("Bearer " + auth, map).enqueue(new Callback<DoctorDaysResponse>() {
-            @Override
-            public void onResponse(Call<DoctorDaysResponse> call, Response<DoctorDaysResponse> response) {
-                if (response.code() == 200) {
-                    drDaysMutableLiveData.setValue(response.body());
-                } else {
-                    Log.d(TAG, "onResponse: " + response.code());
-                }
-            }
-
-            @Override
-            public void onFailure(Call<DoctorDaysResponse> call, Throwable t) {
-                Log.d(TAG, "onFailure: " + t.getMessage());
-            }
-        });
     }
 
     void getAvailableSlots(String auth, int id, int range) {
