@@ -32,6 +32,7 @@ import java.util.List;
 
 import app.iflatco.eclinic.databinding.DrAppointmentFragmentBinding;
 import app.iflatco.eclinic.models.DrAvailableSlotsData;
+import app.iflatco.eclinic.models.SlotesFilteratiton;
 import app.iflatco.eclinic.utils.CustomClickListener;
 import app.iflatco.eclinic.utils.CustomSharedPref;
 import app.iflatco.eclinic.utils.OnAppointmentSelected;
@@ -52,7 +53,10 @@ public class DrAppointment extends Fragment implements DatePickerDialog.OnDateSe
     private DrAppointmentAdapter drAppointmentAdapter;
     private Calendar now;
     private OnAppointmentSelected onAppointmentSelected;
-    String finalDay = "";
+    private String finalDay = "";
+    private String finalDate = "";
+    private DateFormat dayFormat;
+    private List<SlotesFilteratiton> slotesListFiltered;
 
     public static DrAppointment newInstance(Context context) {
         return new DrAppointment();
@@ -65,6 +69,8 @@ public class DrAppointment extends Fragment implements DatePickerDialog.OnDateSe
         binding = DrAppointmentFragmentBinding.inflate(inflater, container, false);
         mViewModel = new ViewModelProvider(this).get(DrAppointmentViewModel.class);
 
+        dayFormat = new SimpleDateFormat("EEE");
+        slotesListFiltered = new ArrayList<>();
         slotsDataList = new ArrayList<>();
         days = new ArrayList<>();
         pref = new CustomSharedPref(getActivity());
@@ -107,11 +113,9 @@ public class DrAppointment extends Fragment implements DatePickerDialog.OnDateSe
     @Override
     public void onResume() {
         super.onResume();
-        mViewModel.getDrDays(pref.getSessionValue("tokenId"), id);
 
-        if (!finalDay.equals("")) {
-            mViewModel.getAvailableSlots(pref.getSessionValue("tokenId"), id, finalDay.toLowerCase(), date);
-        }
+        mViewModel.getAvailableSlots(pref.getSessionValue("tokenId"), id, 30);
+
         Log.d(TAG, "onCreateView: " + id);
         binding.drName.setText(drName);
     }
@@ -126,6 +130,7 @@ public class DrAppointment extends Fragment implements DatePickerDialog.OnDateSe
         Calendar calendar;
         List<Calendar> available = new ArrayList<>();
         int weeks = 4;
+        days.size();
         for (int k = 0; k < days.size(); k++) {
             switch (days.get(k)) {
                 case "fri":
@@ -194,50 +199,33 @@ public class DrAppointment extends Fragment implements DatePickerDialog.OnDateSe
             }
         }
 
-
+        Log.d(TAG, "setSelectableDays: " + available.size());
         return available.toArray(new Calendar[available.size()]);
     }
 
     @Override
     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
-        binding.progress.smoothToShow();
-
         date = year + "-" + (monthOfYear + 1) + "-" + dayOfMonth;
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
-
         try {
             Date dt1 = sdf.parse(date);
-            DateFormat format = new SimpleDateFormat("EEE");
-            finalDay = format.format(dt1);
+            finalDay = dayFormat.format(dt1);
+            finalDate = sdf.format(dt1);
+            Log.d(TAG, "onDateSet: " + finalDate);
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
-        mViewModel.getAvailableSlots(pref.getSessionValue("tokenId"), id, finalDay.toLowerCase(), date);
-        binding.day.setText(date);
+        filterDate(slotsDataList, finalDate);
+        binding.day.setText(finalDate);
         Log.d(TAG, "onDateSet: " + finalDay);
     }
 
     private void initObservers() {
-        mViewModel.drDaysMutableLiveData.observe(getViewLifecycleOwner(), observer -> {
-            binding.day.setVisibility(View.VISIBLE);
-            binding.progress.smoothToHide();
-            days.addAll(observer.getData());
-
-            dpd.setSelectableDays(setSelectableDays());
-
-            Log.d(TAG, "onCreateView: " + observer.getData());
-        });
 
         mViewModel.drSlotsMutableLiveData.observe(getViewLifecycleOwner(), observer -> {
-            binding.progress.smoothToHide();
-            if (observer.getData() != null && observer.getData().size() > 0) {
-                slotsDataList.clear();
-                slotsDataList.addAll(observer.getData());
-                drAppointmentAdapter.setList(observer.getData());
-                Log.d(TAG, "onCreateView: " + observer.getData().get(0).getDay());
-            }
+            slotsDataList = observer.getData();
+            filterDays(observer.getData());
         });
 
         mViewModel.responseAppointmentMutableLiveData.observe(getViewLifecycleOwner(), responseAppointment -> {
@@ -252,10 +240,58 @@ public class DrAppointment extends Fragment implements DatePickerDialog.OnDateSe
         drAppointmentAdapter = new DrAppointmentAdapter(getContext(), new CustomClickListener() {
             @Override
             public void onClick(int position) {
-                DrAvailableSlotsData data = slotsDataList.get(position);
-                mViewModel.pendingAppointment(pref.getSessionValue("tokenId"), data.getSlotId(), date);
+                SlotesFilteratiton data = slotesListFiltered.get(position);
+                mViewModel.pendingAppointment(pref.getSessionValue("tokenId"), data.getSloteId(),
+                        data.getStartTime());
             }
         });
         binding.recyclerView.setAdapter(drAppointmentAdapter);
+    }
+
+    private void filterDays(@NotNull List<DrAvailableSlotsData> data) {
+        SimpleDateFormat utcFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mmX");
+
+        for (int i = 0; i < data.size(); i++) {
+            try {
+                Date date = utcFormat.parse(data.get(i).getStartTime());
+                String day = dayFormat.format(date);
+                if (!days.contains(day)) {
+                    days.add(day.toLowerCase());
+                }
+
+
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+
+        dpd.setSelectableDays(setSelectableDays());
+        binding.progress.smoothToHide();
+        binding.day.setVisibility(View.VISIBLE);
+    }
+
+    private void filterDate(List<DrAvailableSlotsData> data, String date) {
+        SimpleDateFormat utcFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mmX");
+        SimpleDateFormat yearFormat = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat actualTime = new SimpleDateFormat("HH:MM");
+
+        slotesListFiltered.clear();
+        Log.d(TAG, "filterDate: " + date);
+
+        for (int i = 0; i < data.size(); i++) {
+            try {
+                Date dateFormated = utcFormat.parse(data.get(i).getStartTime());
+                String mDateFormated = yearFormat.format(dateFormated);
+                if (mDateFormated.equals(date)) {
+                    slotesListFiltered.add(new SlotesFilteratiton(data.get(i).getSlotId(),
+                            data.get(i).getStartTime(), actualTime.format(dateFormated), yearFormat.format(dateFormated)));
+                }
+
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+        drAppointmentAdapter.setList(slotesListFiltered);
+
     }
 }

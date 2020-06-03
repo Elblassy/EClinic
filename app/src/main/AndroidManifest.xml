@@ -4,21 +4,22 @@
     package="app.iflatco.eclinic">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="false"
         android:theme="@style/AppTheme"
-        android:requestLegacyExternalStorage="true"
         tools:replace="android:supportsRtl">
-        <activity android:name=".ui.page_viewer.DoctorsViewPages"/>
-        <activity android:name=".ui.appointment_patient.MyAppointment"/>
+        <activity
+            android:name=".ui.chat.Chat" />
+        <activity android:name=".ui.page_viewer.DoctorsViewPages" />
+        <activity android:name=".ui.appointment_patient.MyAppointment" />
         <activity android:name=".ui.sign.SignActivity" />
         <activity android:name=".ui.splash.SplashActivity">
             <intent-filter>

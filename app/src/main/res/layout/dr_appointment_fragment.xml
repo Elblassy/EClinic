@@ -7,7 +7,6 @@
     tools:context=".ui.page_viewer.dr_appointment.DrAppointment">
 
 
-
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="0dp"
@@ -37,17 +36,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="24dp"
-        android:background="@drawable/edit_border"
         android:focusable="false"
-        android:hint="@string/day"
-        android:visibility="gone"
+        android:background="@drawable/edit_border"
+        android:hint="choose date"
         android:longClickable="false"
         android:padding="12dp"
         android:textSize="9pt"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView"
-        tools:visibility="visible"/>
+        app:layout_constraintTop_toTopOf="@+id/imageView" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
@@ -58,7 +55,6 @@
         app:layout_constraintEnd_toStartOf="@id/guid4"
         app:layout_constraintStart_toEndOf="@+id/guid"
         app:layout_constraintTop_toBottomOf="@+id/day" />
-
 
 
     <TextView
@@ -98,31 +94,33 @@
         style="@style/AVLoadingIndicatorView.Large"
         app:indicatorName="BallTrianglePathIndicator"
         app:indicatorColor="@color/colorAccent" />
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guid2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent=".85"/>
+        app:layout_constraintGuide_percent=".85" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guid3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent=".18"/>
+        app:layout_constraintGuide_percent=".18" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guid4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent=".92"/>
+        app:layout_constraintGuide_percent=".92" />
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guid"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent=".07"/>
+        app:layout_constraintGuide_percent=".07" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -34,6 +34,8 @@ public class PaymentViewModel extends ViewModel {
             @Override
             public void onResponse(Call<ResponseAppointment> call, Response<ResponseAppointment> response) {
                 if (response.code() == 200) {
+                    Log.d(TAG, "confirmAppointment response: " + response.body().getStatus());
+
                     confirmAppointmentMutableLiveData.setValue(response.body());
                 } else {
                     Log.d(TAG, "confirmAppointment response: " + response.code());

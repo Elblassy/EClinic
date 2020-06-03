@@ -15,12 +15,13 @@ import java.util.List;
 
 import app.iflatco.eclinic.R;
 import app.iflatco.eclinic.models.DrAvailableSlotsData;
+import app.iflatco.eclinic.models.SlotesFilteratiton;
 import app.iflatco.eclinic.utils.CustomClickListener;
 
 public class DrAppointmentAdapter extends RecyclerView.Adapter<DrAppointmentAdapter.ViewHolder> {
 
     private static final String TAG = "SelectDoctorAdapter";
-    private List<DrAvailableSlotsData> list = new ArrayList<>();
+    private List<SlotesFilteratiton> list = new ArrayList<>();
     private Context context;
     private CustomClickListener clickListener;
 
@@ -40,9 +41,9 @@ public class DrAppointmentAdapter extends RecyclerView.Adapter<DrAppointmentAdap
     @Override
     public void onBindViewHolder(@NonNull DrAppointmentAdapter.ViewHolder holder, int position) {
 
-        DrAvailableSlotsData drModel = list.get(position);
+        SlotesFilteratiton drModel = list.get(position);
 
-        holder.time.setText(drModel.getStartTime());
+        holder.time.setText(drModel.getActualTime());
 
         holder.cardView.setOnClickListener(v -> {
             clickListener.onClick(position);
@@ -55,7 +56,7 @@ public class DrAppointmentAdapter extends RecyclerView.Adapter<DrAppointmentAdap
         return list.size();
     }
 
-    public void setList(List<DrAvailableSlotsData> list) {
+    public void setList(List<SlotesFilteratiton> list) {
         this.list = list;
         notifyDataSetChanged();
     }

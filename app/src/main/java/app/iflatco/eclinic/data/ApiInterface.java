@@ -5,6 +5,9 @@ import java.util.HashMap;
 import app.iflatco.eclinic.models.CateResponse;
 import app.iflatco.eclinic.models.DrAvailableSlotsResponse;
 import app.iflatco.eclinic.models.DrResponse;
+import app.iflatco.eclinic.models.JoinToAppointmentResponse;
+import app.iflatco.eclinic.models.PatientAppointmentData;
+import app.iflatco.eclinic.models.PatientAppointmentResponse;
 import app.iflatco.eclinic.models.ResponseAppointment;
 import app.iflatco.eclinic.models.ResponseModel;
 import app.iflatco.eclinic.models.UserModel;
@@ -69,4 +72,13 @@ interface ApiInterface {
     @PATCH("appointments/cancelAppointment")
     Call<ResponseAppointment> cancelAppointment(@Header("Authorization") String authToken,
                                                  @Body HashMap<String, Object> doctorId);
+
+    @Headers({"Content-Type: application/json;charset=UTF-8"})
+    @GET("appointments/upcomingAppointments")
+    Call<PatientAppointmentResponse> getPatientAppointment(@Header("Authorization") String authToken);
+
+    @Headers({"Content-Type: application/json;charset=UTF-8"})
+    @PATCH("appointments/joinUserToAppointment")
+    Call<JoinToAppointmentResponse> joinToAppointment(@Header("Authorization") String authToken,
+                                                      @Body HashMap<String, Object> doctorId);
 }

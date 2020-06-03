@@ -13,18 +13,12 @@ public class DrAvailableSlotsData {
     @SerializedName("day")
     @Expose
     private String day;
-    @SerializedName("start_time")
-    @Expose
-    private String startTime;
-    @SerializedName("end_time")
-    @Expose
-    private String endTime;
     @SerializedName("slot_time")
     @Expose
     private String slotTime;
-    @SerializedName("available")
+    @SerializedName("start_time")
     @Expose
-    private Integer available;
+    private String startTime;
 
     public Integer getSlotId() {
         return slotId;
@@ -38,19 +32,11 @@ public class DrAvailableSlotsData {
         return day;
     }
 
-    public String getStartTime() {
-        return startTime;
-    }
-
-    public String getEndTime() {
-        return endTime;
-    }
-
     public String getSlotTime() {
         return slotTime;
     }
 
-    public Integer getAvailable() {
-        return available;
+    public String getStartTime() {
+        return startTime;
     }
 }

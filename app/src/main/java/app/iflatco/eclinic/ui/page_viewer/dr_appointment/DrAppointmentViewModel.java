@@ -50,11 +50,10 @@ public class DrAppointmentViewModel extends ViewModel {
         });
     }
 
-    void getAvailableSlots(String auth, int id, String day, String date) {
+    void getAvailableSlots(String auth, int id, int range) {
         HashMap<String, Object> map = new HashMap<>();
         map.put("doctor_id", id);
-        map.put("day", day);
-        map.put("date", date);
+        map.put("searchIn", range);
 
         ClientServer.getINSTANCE().getAvailableSlots("Bearer " + auth, map).enqueue(new Callback<DrAvailableSlotsResponse>() {
             @Override
@@ -80,11 +79,14 @@ public class DrAppointmentViewModel extends ViewModel {
         map.put("slot_id", id);
         map.put("date", date);
 
+        Log.d(TAG, "pendingAppointment: " + id);
+
         ClientServer.getINSTANCE().pendingAppointment("Bearer " + auth, map).enqueue(new Callback<ResponseAppointment>() {
             @Override
             public void onResponse(Call<ResponseAppointment> call, Response<ResponseAppointment> response) {
                 if (response.code() == 201) {
                     responseAppointmentMutableLiveData.setValue(response.body());
+                    Log.d(TAG, "onResponse: " + response.body().getData().getDate());
                 } else {
                     Log.d(TAG, "pendingAppointment response: " + response.code());
                 }

@@ -7,6 +7,8 @@ import app.iflatco.eclinic.models.CateResponse;
 import app.iflatco.eclinic.models.DoctorDaysResponse;
 import app.iflatco.eclinic.models.DrAvailableSlotsResponse;
 import app.iflatco.eclinic.models.DrResponse;
+import app.iflatco.eclinic.models.JoinToAppointmentResponse;
+import app.iflatco.eclinic.models.PatientAppointmentResponse;
 import app.iflatco.eclinic.models.ResponseAppointment;
 import app.iflatco.eclinic.models.ResponseModel;
 import app.iflatco.eclinic.models.UserModel;
@@ -77,15 +79,23 @@ public class ClientServer {
         return apiInterface.getAvailableSlots(authToken, doctorId);
     }
 
-    public Call<ResponseAppointment> pendingAppointment(String authToken, HashMap<String, Object> doctorId) {
-        return apiInterface.pendingAppointment(authToken, doctorId);
+    public Call<ResponseAppointment> pendingAppointment(String authToken, HashMap<String, Object> appointment) {
+        return apiInterface.pendingAppointment(authToken, appointment);
     }
 
 
-    public Call<ResponseAppointment> confirmAppointment(String authToken, HashMap<String, Object> doctorId) {
-        return apiInterface.confirmAppointment(authToken, doctorId);
+    public Call<ResponseAppointment> confirmAppointment(String authToken, HashMap<String, Object> appointmentId) {
+        return apiInterface.confirmAppointment(authToken, appointmentId);
     }
-    public Call<ResponseAppointment> cancelAppointment(String authToken, HashMap<String, Object> doctorId) {
-        return apiInterface.cancelAppointment(authToken, doctorId);
+    public Call<ResponseAppointment> cancelAppointment(String authToken, HashMap<String, Object> appointmentId) {
+        return apiInterface.cancelAppointment(authToken, appointmentId);
+    }
+
+    public Call<PatientAppointmentResponse> getPatientAppointment(String authToken) {
+        return apiInterface.getPatientAppointment(authToken);
+    }
+
+    public Call<JoinToAppointmentResponse> joinToAppointment(String authToken, HashMap<String, Object> appointmentId) {
+        return apiInterface.joinToAppointment(authToken, appointmentId);
     }
 }
