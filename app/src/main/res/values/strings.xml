@@ -2,12 +2,12 @@
     <string name="app_name">eClinic</string>
     <string name="mobile_title">Enter your number</string>
     <string name="number_btn">Next</string>
-    <string name="enter_code_title">Enter code you received</string>
+    <string name="enter_code_title">The code sent to :</string>
     <string name="verify">Verify</string>
     <string name="your_info_title">Your Information</string>
     <string name="gender">Gender</string>
     <string name="submit">Submit</string>
-    <string name="send_code_again">"if you didn't recieve code click on "</string>
+    <string name="send_code_again">"if you didn't receive code click on "</string>
     <string name="send_again">Send again</string>
     <string name="title_settings">Settings</string>
     <string name="title_profile">My profile</string>
@@ -24,7 +24,7 @@
     <string name="weight_title">Kg</string>
     <string name="height_title">Cm</string>
     <string name="enter_num_toast">Please enter correct number</string>
-    <string name="enter_num_edit">+2 Enter your mobile number</string>
+    <string name="enter_num_edit">Enter your mobile number</string>
     <string name="first_name">First Name</string>
     <string name="last_name">Last Name</string>
     <string name="birth">Birthdate</string>
@@ -35,5 +35,16 @@
     <string name="speciality">Speciality</string>
     <string name="available_app_title">Available Appointments</string>
     <string name="day">Choose Day</string>
+    <string name="title_ring">Start your visit</string>
+    <string name="select_gender">Please select your gender</string>
+    <string name="select_name">"Please enter your name"</string>
+    <string name="select_weight">Please enter your weight</string>
+    <string name="select_height">Please enter your height</string>
+    <string name="select_date">Please enter your birth date</string>
+    <string name="diagnosed_title">Write your diagnosed here</string>
+    <string name="prescription_title">Write your prescription here</string>
+    <string name="diagnosed_notFound">"Not found any diagonals "</string>
+    <string name="prescription_notFound">Not fount any prescription</string>
+    <string name="appointment_empty">You don\'t have any appointments</string>
 
 </resources>

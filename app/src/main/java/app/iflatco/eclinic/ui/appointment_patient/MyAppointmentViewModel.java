@@ -5,7 +5,6 @@ import android.util.Log;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-
 import java.util.HashMap;
 
 import app.iflatco.eclinic.data.ClientServer;
@@ -21,7 +20,7 @@ public class MyAppointmentViewModel extends ViewModel {
     MutableLiveData<PatientAppointmentResponse> myAppointmentLiveData;
     MutableLiveData<JoinToAppointmentResponse> joinMutableLiveData;
 
-    public MyAppointmentViewModel(){
+    public MyAppointmentViewModel() {
         myAppointmentLiveData = new MutableLiveData<>();
         joinMutableLiveData = new MutableLiveData<>();
     }
@@ -33,9 +32,9 @@ public class MyAppointmentViewModel extends ViewModel {
             public void onResponse(Call<PatientAppointmentResponse> call, Response<PatientAppointmentResponse> response) {
                 if (response.code() == 200) {
                     myAppointmentLiveData.setValue(response.body());
-                    Log.d(TAG, "onResponse: " + response.body().getData().get(0).getDate());
-
+                    Log.d(TAG, "onResponse: " );
                 } else {
+                    myAppointmentLiveData.setValue(new PatientAppointmentResponse());
                     Log.d(TAG, "onResponse: " + response.code());
                 }
             }
@@ -52,12 +51,13 @@ public class MyAppointmentViewModel extends ViewModel {
         map.put("appointment_id", appointmentId);
 
 
-        ClientServer.getINSTANCE().joinToAppointment("Bearer " + auth,map).enqueue(new Callback<JoinToAppointmentResponse>() {
+        ClientServer.getINSTANCE().joinToAppointment("Bearer " + auth, map).enqueue(new Callback<JoinToAppointmentResponse>() {
             @Override
             public void onResponse(Call<JoinToAppointmentResponse> call, Response<JoinToAppointmentResponse> response) {
                 if (response.code() == 200) {
                     joinMutableLiveData.setValue(response.body());
                 } else {
+
                     Log.d(TAG, "onResponse: " + response.code());
                 }
             }

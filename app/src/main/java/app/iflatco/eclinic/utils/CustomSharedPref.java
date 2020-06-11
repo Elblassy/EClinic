@@ -39,6 +39,11 @@ public class CustomSharedPref {
         return pref.getInt("slotId", -1);
     }
 
+    public int getUserId() {
+        return pref.getInt("userId", -1);
+    }
+
+
     public void setPrefMobile(String mobile) {
         editor.putString("mobile", mobile);
         editor.apply();
@@ -102,6 +107,11 @@ public class CustomSharedPref {
 
     public void setPrefPending(boolean pending) {
         editor.putBoolean("pending", pending);
+        editor.apply();
+    }
+
+    public void setPrefUserId(int userId) {
+        editor.putInt("userId", userId);
         editor.apply();
     }
 

@@ -1,7 +1,6 @@
 package app.iflatco.eclinic.ui.appointment_patient;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -28,6 +28,9 @@ public class MyAppointmentAdapter extends RecyclerView.Adapter<MyAppointmentAdap
     private Context context;
     private CustomClickListener clickListener;
     private String today;
+    SimpleDateFormat utcFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mmX");
+    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    SimpleDateFormat actualTime = new SimpleDateFormat("HH:mm");
 
     public MyAppointmentAdapter(Context context, CustomClickListener clickListener) {
         this.context = context;
@@ -55,13 +58,18 @@ public class MyAppointmentAdapter extends RecyclerView.Adapter<MyAppointmentAdap
         holder.name.setText(drModel.getFirstName() + " " + drModel.getLastName());
         holder.title.setText(drModel.getAr());
 
-        Log.d(TAG, "onBindViewHolder: " + today);
-        if (drModel.getDate().equals(today)) {
-            holder.time.setText("Today" + " at " + drModel.getStartTime());
-        } else {
-            holder.time.setText(drModel.getDate() + " at " + drModel.getStartTime());
-
+        try {
+            Date date = utcFormat.parse(drModel.getStartTime());
+            String mDateFormated = dateFormat.format(date);
+            if (mDateFormated.equals(today)) {
+                holder.time.setText("Today" + " at " + actualTime.format(date));
+            } else {
+                holder.time.setText(mDateFormated + " at " + actualTime.format(date));
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
+
 
         holder.cardView.setOnClickListener(v -> {
             clickListener.onClick(position);

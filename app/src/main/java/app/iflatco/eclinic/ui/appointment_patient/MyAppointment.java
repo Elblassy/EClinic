@@ -2,6 +2,7 @@ package app.iflatco.eclinic.ui.appointment_patient;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -40,15 +41,22 @@ public class MyAppointment extends AppCompatActivity {
         mViewModel.getMyAppointment(pref.getSessionValue("tokenId"));
 
         mViewModel.myAppointmentLiveData.observe(this, appointments -> {
-            assert appointments.getData() != null;
-            dataList.addAll(appointments.getData());
-            myAppointmentAdapter.setList(appointments.getData());
+            binding.progress.smoothToHide();
+            if (appointments.getData() != null) {
+                if (appointments.getData().size() > 0) {
+                    dataList.addAll(appointments.getData());
+                    myAppointmentAdapter.setList(appointments.getData());
+                }else {
+                    binding.emptyView.setVisibility(View.VISIBLE);
+                }
+            }
         });
 
         mViewModel.joinMutableLiveData.observe(this, join -> {
             if (join.getStatus()) {
                 startActivity(new Intent(MyAppointment.this, Chat.class)
                         .putExtra("room_id", join.getData().getRoomId())
+                        .putExtra("appEndTime", join.getData().getAppEndTime())
                         .putExtra("doctor_name", doctorName));
             } else {
                 Toast.makeText(this, "Please wait your time", Toast.LENGTH_SHORT).show();

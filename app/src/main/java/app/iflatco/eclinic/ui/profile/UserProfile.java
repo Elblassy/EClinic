@@ -28,6 +28,7 @@ import java.io.File;
 import app.iflatco.eclinic.R;
 import app.iflatco.eclinic.databinding.UserProfileFragmentBinding;
 import app.iflatco.eclinic.ui.appointment_patient.MyAppointment;
+import app.iflatco.eclinic.ui.old_appointment.MyOldAppointment;
 import app.iflatco.eclinic.utils.CustomSharedPref;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -57,6 +58,7 @@ public class UserProfile extends Fragment {
         initView();
 
         binding.appointment.setOnClickListener(v -> startActivity(new Intent(getActivity(), MyAppointment.class)));
+        binding.oldVisits.setOnClickListener(v -> startActivity(new Intent(getActivity(), MyOldAppointment.class)));
 
         binding.profileImage.setOnClickListener(v -> {
             checkPermission();
@@ -86,7 +88,8 @@ public class UserProfile extends Fragment {
                     MultipartBody.Part.createFormData("file", file.getName(), requestFile);
 
             // pref.setProfImage(encodedImage);
-            mViewModel.updateImage(pref.getSessionValue("tokenId"), body);
+            //mViewModel.updateImage(pref.getSessionValue("tokenId"), body);
+
             binding.profileImage.setImageURI(imageUri);
 
 
@@ -157,5 +160,6 @@ public class UserProfile extends Fragment {
             }
         }
     }
+
 
 }

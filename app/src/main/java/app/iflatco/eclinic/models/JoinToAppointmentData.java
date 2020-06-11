@@ -7,8 +7,15 @@ public class JoinToAppointmentData {
     @SerializedName("room_id")
     @Expose
     private String roomId;
+    @SerializedName("appEndTime")
+    @Expose
+    private String appEndTime;
 
     public String getRoomId() {
         return roomId;
+    }
+
+    public String getAppEndTime() {
+        return appEndTime;
     }
 }

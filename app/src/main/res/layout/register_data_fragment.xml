@@ -10,9 +10,11 @@
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:scaleType="fitXY"
-        android:src="@drawable/rec_sign" />
+        android:src="@drawable/rec_sign"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView"
@@ -114,6 +116,7 @@
         android:layout_marginHorizontal="24dp"
         android:layout_marginTop="12dp"
         android:padding="12dp"
+        android:maxLength="3"
         android:background="@drawable/edit_border"
         android:hint="@string/weight"
         android:inputType="numberDecimal"
@@ -132,6 +135,7 @@
         android:layout_marginHorizontal="24dp"
         android:layout_marginTop="12dp"
         android:padding="12dp"
+        android:maxLength="3"
         android:background="@drawable/edit_border"
         android:hint="@string/height"
         android:textSize="9pt"

@@ -16,16 +16,31 @@
          />
 
     <TextView
+        android:id="@+id/text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="24dp"
         android:text="@string/enter_code_title"
         android:textColor="@color/colorAccent"
+        android:maxLines="2"
         android:textSize="13pt"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/guid" />
+        app:layout_constraintTop_toBottomOf="@+id/guid3" />
+
+    <TextView
+        android:id="@+id/number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="24dp"
+        android:text="+201060279201"
+        android:maxLines="2"
+        android:textSize="11pt"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text" />
     <com.goodiebag.pinview.Pinview
         android:id="@+id/code"
         android:layout_width="match_parent"
@@ -62,37 +77,45 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent=".45"/>
+        app:layout_constraintGuide_percent=".4"/>
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guid3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".23"/>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guid2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent=".74"/>
+        app:layout_constraintGuide_percent=".7"/>
 
-    <TextView
-        android:id="@+id/click_again_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="24dp"
-        android:text="@string/send_code_again"
-        android:textSize="8pt"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/guid2" />
+<!--    <TextView-->
+<!--        android:id="@+id/click_again_label"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginHorizontal="24dp"-->
+<!--        android:text="@string/send_code_again"-->
+<!--        android:textSize="8pt"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/guid2" />-->
 
-    <TextView
-        android:id="@+id/click_again"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="24dp"
-        android:text="@string/send_again"
-        android:textColor="@color/colorAccent"
-        android:textStyle="bold"
-        android:textSize="8pt"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/click_again_label" />
+<!--    <TextView-->
+<!--        android:id="@+id/click_again"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginHorizontal="24dp"-->
+<!--        android:text="@string/send_again"-->
+<!--        android:textColor="@color/colorAccent"-->
+<!--        android:textStyle="bold"-->
+<!--        android:textSize="8pt"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/click_again_label" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

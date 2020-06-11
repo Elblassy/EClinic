@@ -8,9 +8,12 @@ import app.iflatco.eclinic.models.DoctorDaysResponse;
 import app.iflatco.eclinic.models.DrAvailableSlotsResponse;
 import app.iflatco.eclinic.models.DrResponse;
 import app.iflatco.eclinic.models.JoinToAppointmentResponse;
+import app.iflatco.eclinic.models.OldMessagesModel;
 import app.iflatco.eclinic.models.PatientAppointmentResponse;
+import app.iflatco.eclinic.models.PrescriptionResponse;
 import app.iflatco.eclinic.models.ResponseAppointment;
 import app.iflatco.eclinic.models.ResponseModel;
+import app.iflatco.eclinic.models.UploadImageResponse;
 import app.iflatco.eclinic.models.UserModel;
 import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
@@ -87,6 +90,7 @@ public class ClientServer {
     public Call<ResponseAppointment> confirmAppointment(String authToken, HashMap<String, Object> appointmentId) {
         return apiInterface.confirmAppointment(authToken, appointmentId);
     }
+
     public Call<ResponseAppointment> cancelAppointment(String authToken, HashMap<String, Object> appointmentId) {
         return apiInterface.cancelAppointment(authToken, appointmentId);
     }
@@ -95,7 +99,24 @@ public class ClientServer {
         return apiInterface.getPatientAppointment(authToken);
     }
 
+    public Call<PatientAppointmentResponse> getFinishedAppointment(String authToken) {
+        return apiInterface.getFinishedAppointment(authToken);
+    }
+
+
     public Call<JoinToAppointmentResponse> joinToAppointment(String authToken, HashMap<String, Object> appointmentId) {
         return apiInterface.joinToAppointment(authToken, appointmentId);
+    }
+
+    public Call<OldMessagesModel> getOldMessages(String authToken, HashMap<String, Object> roomId) {
+        return apiInterface.getOldMessages(authToken, roomId);
+    }
+
+    public Call<UploadImageResponse> uploadImage(String authToken, MultipartBody.Part image, MultipartBody.Part chatRoomId) {
+        return apiInterface.uploadImage(authToken, image, chatRoomId);
+    }
+
+    public Call<PrescriptionResponse> getPrescription(String authToken, HashMap<String, Object> data) {
+        return apiInterface.getPrescription(authToken, data);
     }
 }

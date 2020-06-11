@@ -29,36 +29,85 @@
 
                 <TextView
                     android:id="@+id/toolbar_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Toolbar Title"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
                     android:textColor="#FFF"
                     android:textSize="10pt"
+                    android:gravity="center"
+                    app:layout_constraintHorizontal_chainStyle="spread_inside"
+                    app:layout_constraintHorizontal_weight="3"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/file_layout"
+                    app:layout_constraintStart_toEndOf="@id/timer"
                     app:layout_constraintTop_toTopOf="parent" />
 
+                <TextView
+                    android:id="@+id/timer"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:text="60:00"
+                    android:textColor="#FFF"
+                    android:textSize="9pt"
+                    android:gravity="center"
+                    android:visibility="invisible"
+                    app:layout_constraintHorizontal_chainStyle="spread_inside"
+                    app:layout_constraintHorizontal_weight="1.5"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/toolbar_title"
+                    app:layout_constraintStart_toEndOf="@+id/back"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
                     android:id="@+id/back"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:foreground="?attr/selectableItemBackgroundBorderless"
                     app:srcCompat="@drawable/ic_baseline_arrow_24"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <LinearLayout
+                    android:id="@+id/file_layout"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:clickable="true"
+                    android:foreground="?attr/selectableItemBackgroundBorderless"
+                    android:layout_marginEnd="12dp"
+                    app:layout_constraintHorizontal_chainStyle="spread_inside"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/video"
+                    app:layout_constraintStart_toEndOf="@id/toolbar_title"
+                    app:layout_constraintTop_toTopOf="parent"
+                    >
+
+                    <ImageView
+                        android:id="@+id/file"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="12dp"
+                        android:layout_gravity="center"
+                        app:srcCompat="@drawable/ic_baseline_insert_drive_file_24" />
+
+                </LinearLayout>
 
                 <ImageView
                     android:id="@+id/video"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
                     android:foregroundGravity="right"
-                    android:layout_marginEnd="12dp"
+                    android:padding="12dp"
+                    android:clickable="true"
+                    android:foreground="?attr/selectableItemBackgroundBorderless"
                     app:srcCompat="@drawable/ic_baseline_videocam_24"
+                    app:layout_constraintHorizontal_chainStyle="spread_inside"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintStart_toEndOf="@id/file_layout"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
+                    app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.appcompat.widget.Toolbar>

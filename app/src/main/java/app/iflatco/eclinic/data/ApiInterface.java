@@ -3,15 +3,17 @@ package app.iflatco.eclinic.data;
 import java.util.HashMap;
 
 import app.iflatco.eclinic.models.CateResponse;
+import app.iflatco.eclinic.models.DoctorDaysResponse;
 import app.iflatco.eclinic.models.DrAvailableSlotsResponse;
 import app.iflatco.eclinic.models.DrResponse;
 import app.iflatco.eclinic.models.JoinToAppointmentResponse;
-import app.iflatco.eclinic.models.PatientAppointmentData;
+import app.iflatco.eclinic.models.OldMessagesModel;
 import app.iflatco.eclinic.models.PatientAppointmentResponse;
+import app.iflatco.eclinic.models.PrescriptionResponse;
 import app.iflatco.eclinic.models.ResponseAppointment;
 import app.iflatco.eclinic.models.ResponseModel;
+import app.iflatco.eclinic.models.UploadImageResponse;
 import app.iflatco.eclinic.models.UserModel;
-import app.iflatco.eclinic.models.DoctorDaysResponse;
 import okhttp3.MultipartBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -48,16 +50,19 @@ interface ApiInterface {
 
     @Multipart
     @PATCH("user/updateImage")
-    Call<ResponseModel> updateProfImage(@Header("Authorization") String authToken, @Part MultipartBody.Part image);
+    Call<ResponseModel> updateProfImage(@Header("Authorization") String authToken,
+                                        @Part MultipartBody.Part image);
 
     @Headers({"Content-Type: application/json;charset=UTF-8"})
     @POST("slots/getDoctorDays")
-    Call<DoctorDaysResponse> getDoctorDays(@Header("Authorization") String authToken, @Body HashMap<String, Integer> doctorId);
+    Call<DoctorDaysResponse> getDoctorDays(@Header("Authorization") String authToken,
+                                           @Body HashMap<String, Integer> doctorId);
 
     @Headers({"Content-Type: application/json;charset=UTF-8"})
     @POST("slots/getOpenSlots")
     Call<DrAvailableSlotsResponse> getAvailableSlots(@Header("Authorization") String authToken,
                                                      @Body HashMap<String, Object> doctorId);
+
     @Headers({"Content-Type: application/json;charset=UTF-8"})
     @POST("appointments/addAppointment")
     Call<ResponseAppointment> pendingAppointment(@Header("Authorization") String authToken,
@@ -71,14 +76,36 @@ interface ApiInterface {
     @Headers({"Content-Type: application/json;charset=UTF-8"})
     @PATCH("appointments/cancelAppointment")
     Call<ResponseAppointment> cancelAppointment(@Header("Authorization") String authToken,
-                                                 @Body HashMap<String, Object> doctorId);
+                                                @Body HashMap<String, Object> doctorId);
 
     @Headers({"Content-Type: application/json;charset=UTF-8"})
     @GET("appointments/upcomingAppointments")
     Call<PatientAppointmentResponse> getPatientAppointment(@Header("Authorization") String authToken);
 
     @Headers({"Content-Type: application/json;charset=UTF-8"})
+    @GET("appointments/finishedAppointments")
+    Call<PatientAppointmentResponse> getFinishedAppointment(@Header("Authorization") String authToken);
+
+
+    @Headers({"Content-Type: application/json;charset=UTF-8"})
     @PATCH("appointments/joinUserToAppointment")
     Call<JoinToAppointmentResponse> joinToAppointment(@Header("Authorization") String authToken,
                                                       @Body HashMap<String, Object> doctorId);
+
+    @Headers({"Content-Type: application/json;charset=UTF-8"})
+    @POST("messages/getFinishedMessages")
+    Call<OldMessagesModel> getOldMessages(@Header("Authorization") String authToken,
+                                          @Body HashMap<String, Object> roomId);
+
+    @Multipart
+    @POST("messages/uploadFile")
+    Call<UploadImageResponse> uploadImage(@Header("Authorization") String authToken,
+                                          @Part MultipartBody.Part image,
+                                          @Part MultipartBody.Part chatRoomId);
+
+    @Headers({"Content-Type: application/json;charset=UTF-8"})
+    @POST("prescriptions/getPrescription")
+    Call<PrescriptionResponse> getPrescription(@Header("Authorization") String authToken,
+                                               @Body HashMap<String, Object> doctorId);
+
 }

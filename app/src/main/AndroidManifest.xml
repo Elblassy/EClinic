@@ -6,21 +6,34 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
-        android:allowBackup="true"
+        android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
+        android:screenOrientation="portrait"
         android:supportsRtl="false"
         android:theme="@style/AppTheme"
         tools:replace="android:supportsRtl">
+        <activity android:name=".ui.prescription.PrescriptionActivity" />
+        <activity android:name=".ui.chat.ImagePreview" />
+        <activity android:name=".ui.old_chat.OldChat" />
+        <activity android:name=".ui.old_appointment.MyOldAppointment" />
         <activity
-            android:name=".ui.chat.Chat" />
+            android:name=".ui.ring.RingActivity"
+            android:showOnLockScreen="true" />
+        <activity android:name=".ui.chat.Chat" />
         <activity android:name=".ui.page_viewer.DoctorsViewPages" />
         <activity android:name=".ui.appointment_patient.MyAppointment" />
-        <activity android:name=".ui.sign.SignActivity" />
+        <activity
+            android:name=".ui.sign.SignActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize|adjustNothing" />
         <activity android:name=".ui.splash.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,6 +42,13 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.main.MainActivity" />
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/ic_notification" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/colorAccent" />
 
         <service
             android:name=".notification.MyFirebaseInstanceIDService"

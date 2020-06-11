@@ -37,9 +37,9 @@ public class MobileNumber extends Fragment {
 
 
         binding.next.setOnClickListener(v -> {
-            if (!binding.number.getText().toString().isEmpty() && binding.number.getText().toString().length() >= 10) {
+            if (!binding.number.getText().toString().isEmpty() && binding.number.getText().toString().length() >= 5) {
                 Navigation.findNavController(v).navigate(R.id.action_mobileNumber_to_activateMobile);
-                pref.setPrefMobile(binding.number.getText().toString().trim());
+                pref.setPrefMobile(binding.ccp.getSelectedCountryCodeWithPlus() + binding.number.getText().toString().trim());
             } else {
                 Toast.makeText(getContext(), getResources().getString(R.string.enter_num_toast), Toast.LENGTH_SHORT).show();
             }

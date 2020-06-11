@@ -25,13 +25,27 @@
     <string name="height_title">سم</string>
 
     <string name="enter_num_toast">من فضلك ادخل رقم صحيح</string>
-    <string name="enter_num_edit">+2 ادخل رقم هاتفك</string>
+    <string name="enter_num_edit">ادخل رقم هاتفك</string>
 
     <string name="first_name">اسمك الاول</string>
     <string name="last_name">اسم العائلة</string>
     <string name="birth">تاريخ ميلادك</string>
     <string name="weight">وزنك</string>
     <string name="height">طولك</string>
-    <string name="day">Choose Day</string>
+    <string name="select_cate">من فضلك اختار التخصص</string>
+    <string name="speciality">التخصص</string>
+    <string name="available_app_title">المواعيد المتاحة</string>
+    <string name="day">اختار اليوم</string>
+    <string name="title_ring">ابدأ زيارتك</string>
+    <string name="select_gender">من فضلك اختار نوعك</string>
+    <string name="select_name">"من فضلك ادخل اسمك"</string>
+    <string name="select_weight">من فضلك ادخل وزنك</string>
+    <string name="select_height">من فضلك ادخل طولك</string>
+    <string name="select_date">من فضلك ادخل تاريخ ميلادك</string>
+    <string name="diagnosed_title">اكتب تشخيصك للحالة هنا</string>
+    <string name="prescription_title">اكتب الروشتة هنا</string>
+    <string name="diagnosed_notFound">لم يوجد تشخيص حتى الأن</string>
+    <string name="prescription_notFound">لا يوجد روشتة حتى الأن</string>
+    <string name="appointment_empty">لا تمتلك مواعيد حتى الأن</string>
 
 </resources>

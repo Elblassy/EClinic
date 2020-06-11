@@ -1,5 +1,6 @@
 package app.iflatco.eclinic.ui.page_viewer.payment;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,6 +15,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import app.iflatco.eclinic.databinding.PaymentFragmentBinding;
 import app.iflatco.eclinic.utils.CustomSharedPref;
+import app.iflatco.eclinic.utils.OnDoctorSelected;
 
 public class Payment extends Fragment {
     private static final String TAG = "Payment";
@@ -22,6 +24,7 @@ public class Payment extends Fragment {
     private int id;
     private CustomSharedPref pref;
     private PaymentFragmentBinding binding;
+    private OnDoctorSelected onDoctorSelected;
 
     public static Payment newInstance(Context context) {
         return new Payment();
@@ -40,11 +43,22 @@ public class Payment extends Fragment {
             pref.setPrefPending(false);
             mViewModel.confirmAppointment(pref.getSessionValue("tokenId"), id);
             Log.d(TAG, "onCreateView: " + pref.getSessionBoolean("pending"));
+            onDoctorSelected.onClicked(-1, "");
         });
 
         return binding.getRoot();
     }
 
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        try {
+            onDoctorSelected = (OnDoctorSelected) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(((Activity) context).getLocalClassName()
+                    + " must implement OnButtonClickListener");
+        }
+    }
 
     @Override
     public void onResume() {

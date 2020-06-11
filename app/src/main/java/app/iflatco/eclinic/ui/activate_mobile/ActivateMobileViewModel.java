@@ -44,7 +44,7 @@ public class ActivateMobileViewModel extends AndroidViewModel {
     //the method is sending verification code
     public void sendVerificationCode(String mobile) {
         PhoneAuthProvider.getInstance().verifyPhoneNumber(
-                "+2" + mobile,
+                 mobile,
                 60,
                 TimeUnit.SECONDS,
                 TaskExecutors.MAIN_THREAD,

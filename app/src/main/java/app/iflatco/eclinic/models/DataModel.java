@@ -5,6 +5,9 @@ import com.google.gson.annotations.SerializedName;
 
 public class DataModel {
 
+    @SerializedName("user_id")
+    @Expose
+    private int userId;
     @SerializedName("token")
     @Expose
     private String token;
@@ -81,5 +84,9 @@ public class DataModel {
 
     public String getRole() {
         return role;
+    }
+
+    public int getUserId() {
+        return userId;
     }
 }

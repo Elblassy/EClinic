@@ -1,6 +1,5 @@
 package app.iflatco.eclinic.notification;
 
-import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -18,12 +17,13 @@ import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
-
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Random;
 
 import app.iflatco.eclinic.R;
+import app.iflatco.eclinic.ui.appointment_patient.MyAppointment;
+import app.iflatco.eclinic.ui.ring.RingActivity;
 import app.iflatco.eclinic.utils.CustomSharedPref;
 
 
@@ -48,7 +48,6 @@ public class MyFirebaseInstanceIDService extends FirebaseMessagingService {
                         Log.w("MyFireBaseMessaging", "getInstanceId failed", task.getException());
                         return;
                     }
-
                     // Get new Instance ID token
                     String token = task.getResult().getToken();
                     Log.e("My Token", token);
@@ -59,9 +58,21 @@ public class MyFirebaseInstanceIDService extends FirebaseMessagingService {
     public void onMessageReceived(@NotNull RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
 
+        String title = remoteMessage.getData().get("title");
         int notificationId = new Random().nextInt(60000);
+        CustomSharedPref pref = new CustomSharedPref(this);
 
-        final Intent intent = new Intent(this, Notification.class);
+        assert title != null;
+        if (title.equals("Call")) {
+            String roomId = String.valueOf(remoteMessage.getData().get("room_id"));
+            String userName = String.valueOf(remoteMessage.getData().get("user_name"));
+
+            startActivity(new Intent(this, RingActivity.class).putExtra("room_id", roomId)
+                    .putExtra("user_name", userName).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+            return;
+        }
+
+        final Intent intent = new Intent(this, MyAppointment.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent,
                 PendingIntent.FLAG_ONE_SHOT);
@@ -80,6 +91,7 @@ public class MyFirebaseInstanceIDService extends FirebaseMessagingService {
                 .setContentText(remoteMessage.getData().get("message")) //ditto
                 .setAutoCancel(true)  //dismisses the notification on click
                 .setSound(defaultSoundUri)
+                .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
                 .setContentIntent(pendingIntent)
                 .setPriority(NotificationCompat.PRIORITY_HIGH);
 
@@ -102,7 +114,7 @@ public class MyFirebaseInstanceIDService extends FirebaseMessagingService {
         adminChannel.setDescription(adminChannelDescription);
         adminChannel.enableLights(true);
         adminChannel.setLightColor(getResources().getColor(R.color.colorAccent));
-        adminChannel.setLockscreenVisibility(Notification.VISIBILITY_PUBLIC);
+        adminChannel.setLockscreenVisibility(NotificationCompat.VISIBILITY_PUBLIC);
         adminChannel.setShowBadge(true);
         adminChannel.enableVibration(true);
         if (notificationManager != null) {

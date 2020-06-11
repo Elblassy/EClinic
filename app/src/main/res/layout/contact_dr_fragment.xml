@@ -64,6 +64,8 @@
         android:background="@drawable/btn_nxt_prev"
         app:srcCompat="@drawable/ic_chevron_right_24dp"
         android:layout_margin="34dp"
+        android:clickable="true"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
         android:textColor="@color/colorAccent"
         app:layout_constraintBottom_toTopOf="@id/guid2"
         app:layout_constraintEnd_toEndOf="parent" />

@@ -26,18 +26,41 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/guid" />
 
+
+    <com.hbb20.CountryCodePicker
+        android:id="@+id/ccp"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginStart="4dp"
+        android:gravity="center"
+        app:ccp_textSize="7pt"
+        app:ccp_autoDetectCountry="true"
+        app:ccp_showFullName="false"
+        app:ccp_showPhoneCode="true"
+        app:ccp_showNameCode="true"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintEnd_toStartOf="@id/number"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guid" />
+
     <EditText
         android:id="@+id/number"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="60dp"
-        android:layout_marginHorizontal="24dp"
+        android:layout_marginHorizontal="8dp"
         android:layout_marginTop="12dp"
         android:padding="12dp"
         android:inputType="phone"
+        android:gravity="center"
+
         android:background="@drawable/edit_border"
         android:hint="@string/enter_num_edit"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintHorizontal_weight="2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@id/ccp"
         app:layout_constraintTop_toTopOf="@+id/guid" />
 
     <Button

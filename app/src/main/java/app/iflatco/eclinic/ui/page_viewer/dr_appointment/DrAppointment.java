@@ -2,6 +2,7 @@ package app.iflatco.eclinic.ui.page_viewer.dr_appointment;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
@@ -29,6 +30,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import app.iflatco.eclinic.databinding.DrAppointmentFragmentBinding;
 import app.iflatco.eclinic.models.DrAvailableSlotsData;
@@ -65,7 +67,7 @@ public class DrAppointment extends Fragment implements DatePickerDialog.OnDateSe
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-
+        setLocal();
         binding = DrAppointmentFragmentBinding.inflate(inflater, container, false);
         mViewModel = new ViewModelProvider(this).get(DrAppointmentViewModel.class);
 
@@ -273,15 +275,18 @@ public class DrAppointment extends Fragment implements DatePickerDialog.OnDateSe
     private void filterDate(List<DrAvailableSlotsData> data, String date) {
         SimpleDateFormat utcFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mmX");
         SimpleDateFormat yearFormat = new SimpleDateFormat("yyyy-MM-dd");
-        SimpleDateFormat actualTime = new SimpleDateFormat("HH:MM");
+        SimpleDateFormat actualTime = new SimpleDateFormat("HH:mm");
 
         slotesListFiltered.clear();
         Log.d(TAG, "filterDate: " + date);
+
 
         for (int i = 0; i < data.size(); i++) {
             try {
                 Date dateFormated = utcFormat.parse(data.get(i).getStartTime());
                 String mDateFormated = yearFormat.format(dateFormated);
+                Log.d(TAG, "filterDate: " + actualTime.format(dateFormated));
+
                 if (mDateFormated.equals(date)) {
                     slotesListFiltered.add(new SlotesFilteratiton(data.get(i).getSlotId(),
                             data.get(i).getStartTime(), actualTime.format(dateFormated), yearFormat.format(dateFormated)));
@@ -293,5 +298,12 @@ public class DrAppointment extends Fragment implements DatePickerDialog.OnDateSe
         }
         drAppointmentAdapter.setList(slotesListFiltered);
 
+    }
+
+    private void setLocal() {
+        Locale locale = new Locale("en");
+        Locale.setDefault(locale);
+        Configuration config = getActivity().getBaseContext().getResources().getConfiguration();
+        config.locale = locale;
     }
 }

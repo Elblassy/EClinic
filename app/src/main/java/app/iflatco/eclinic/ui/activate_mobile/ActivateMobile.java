@@ -73,6 +73,7 @@ public class ActivateMobile extends Fragment {
             super.onCodeSent(s, forceResendingToken);
             Log.d(TAG, "onCodeSent: " + s);
             mVerificationId = s;
+
         }
     };
 
@@ -89,7 +90,7 @@ public class ActivateMobile extends Fragment {
         mViewModel.sendVerificationCode(pref.getSessionValue("mobile"));
         mAuth = FirebaseAuth.getInstance();
         mAuth.useAppLanguage();
-
+        binding.number.setText(pref.getSessionValue("mobile"));
         builder = new AlertDialog.Builder(getActivity());
         builder.setView(R.layout.progress_dialog);
         dialog = builder.create();
@@ -101,6 +102,7 @@ public class ActivateMobile extends Fragment {
                 dialog.dismiss();
                 if (list.getStatus()) {
                     DataModel data = list.getData();
+                    pref.setPrefUserId(data.getUserId());
                     pref.setPrefFirstName(data.getFirstName());
                     pref.setPrefLastName(data.getLastName());
                     pref.setPrefGender(data.getGender());
@@ -138,6 +140,7 @@ public class ActivateMobile extends Fragment {
             //creating the credential
             Log.d(TAG, "verifyVerificationCode: " + mVerificationId);
             PhoneAuthCredential credential = PhoneAuthProvider.getCredential(mVerificationId, code);
+
 
             //signing the user
             signInWithPhoneAuthCredential(credential);

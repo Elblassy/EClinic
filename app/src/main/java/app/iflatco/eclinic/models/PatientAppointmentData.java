@@ -8,6 +8,9 @@ public class PatientAppointmentData {
     @SerializedName("date")
     @Expose
     private String date;
+    @SerializedName("room_id")
+    @Expose
+    private String roomId;
     @SerializedName("appointment_id")
     @Expose
     private Integer appointmentId;
@@ -33,6 +36,10 @@ public class PatientAppointmentData {
     @Expose
     private String startTime;
 
+
+    public String getRoomId() {
+        return roomId;
+    }
 
     public String getDate() {
         return date;

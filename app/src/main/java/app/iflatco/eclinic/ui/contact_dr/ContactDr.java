@@ -1,5 +1,6 @@
 package app.iflatco.eclinic.ui.contact_dr;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,6 +12,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -32,9 +34,9 @@ public class ContactDr extends Fragment {
     private boolean selected = false;
     List<CateDataModel> cateDataModel;
     List<String> cateList;
-
+    AlertDialog.Builder builder;
+    Dialog dialog;
     ArrayAdapter<String> cateAdapter;
-
 
 
     @Override
@@ -46,12 +48,20 @@ public class ContactDr extends Fragment {
         cateDataModel = new ArrayList<>();
         cateList = new ArrayList<>();
 
+        builder = new AlertDialog.Builder(getContext());
+        builder.setView(R.layout.progress_dialog);
+        dialog = builder.create();
+        dialog.show();
+        dialog.setCancelable(false);
+
+
         CustomSharedPref pref = new CustomSharedPref(getContext());
 
         mViewModel.getCategories(pref.getSessionValue("tokenId"));
 
         mViewModel.cateResponseMutableLiveData.observe(getViewLifecycleOwner(), list -> {
             selected = true;
+            dialog.dismiss();
             cateDataModel = list.getData();
             initSpinner();
         });

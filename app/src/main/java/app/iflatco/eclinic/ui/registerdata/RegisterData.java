@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 
@@ -24,11 +25,11 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
-import app.iflatco.eclinic.ui.main.MainActivity;
 import app.iflatco.eclinic.R;
 import app.iflatco.eclinic.databinding.RegisterDataFragmentBinding;
 import app.iflatco.eclinic.models.DataModel;
 import app.iflatco.eclinic.models.UserModel;
+import app.iflatco.eclinic.ui.main.MainActivity;
 import app.iflatco.eclinic.utils.CustomSharedPref;
 
 public class RegisterData extends Fragment {
@@ -41,6 +42,12 @@ public class RegisterData extends Fragment {
     ArrayAdapter<String> genderAdapter;
     AlertDialog.Builder builder;
     Dialog dialog;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+        super.onCreate(savedInstanceState);
+    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -61,6 +68,7 @@ public class RegisterData extends Fragment {
             if (responseModel.getStatus()) {
                 pref.setPrefSignUp(true);
                 DataModel data = responseModel.getData();
+                pref.setPrefUserId(data.getUserId());
                 pref.setPrefFirstName(data.getFirstName());
                 pref.setPrefLastName(data.getLastName());
                 pref.setPrefGender(data.getGender());
@@ -84,6 +92,7 @@ public class RegisterData extends Fragment {
         super.onAttach(context);
 
         genders = new ArrayList<>();
+        genders.add("Gender");
         genders.add("Male");
         genders.add("Female");
 
@@ -133,27 +142,27 @@ public class RegisterData extends Fragment {
         String birthDate = binding.birthDate.getText().toString().trim();
 
         if (firstName.isEmpty()) {
-            binding.firstName.setError("Please enter your name");
+            binding.firstName.setError(getResources().getString(R.string.select_name));
             return;
         }
         if (lastName.isEmpty()) {
-            binding.lastName.setError("Please enter your name");
+            binding.lastName.setError(getResources().getString(R.string.select_name));
             return;
         }
-        if (gender.isEmpty()) {
-            binding.gender.setError("Please select your gender");
+        if (gender.isEmpty() || binding.gender.getSelectedIndex() == 0) {
+            binding.gender.setError(getResources().getString(R.string.select_gender));
             return;
         }
-        if (weight.isEmpty()) {
-            binding.weight.setError("Please enter your weight");
+        if (weight.isEmpty() || Integer.parseInt(weight) > 355) {
+            binding.weight.setError(getResources().getString(R.string.select_weight));
             return;
         }
-        if (height.isEmpty()) {
-            binding.height.setError("Please enter your height");
+        if (height.isEmpty() || Integer.parseInt(height) > 255) {
+            binding.height.setError(getResources().getString(R.string.select_height));
             return;
         }
         if (birthDate.isEmpty()) {
-            binding.birthDate.setError("Please enter your birth date");
+            binding.birthDate.setError(getResources().getString(R.string.select_date));
             return;
         }
 

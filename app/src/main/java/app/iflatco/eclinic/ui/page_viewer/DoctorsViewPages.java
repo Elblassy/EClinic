@@ -39,6 +39,8 @@ public class DoctorsViewPages extends AppCompatActivity implements OnDoctorSelec
         }
     }
 
+
+
     private void setViewPager(int id) {
         pagerAdapter.addFragment(SelectDoctor.newInstance(this, id));
         pagerAdapter.addFragment(DrAppointment.newInstance(this));
@@ -81,6 +83,9 @@ public class DoctorsViewPages extends AppCompatActivity implements OnDoctorSelec
     @Override
     public void onClicked(int pos, String name) {
 
+        if (pos == -1){
+            binding.masterViewPager.setCurrentItem(getItem(1), true);
+        }
         binding.prev.setVisibility(View.VISIBLE);
         Log.d(TAG, "onDoctorSelected: " + pos);
         String tag = "android:switcher:" + binding.masterViewPager.getId() + ":" + 1;
@@ -89,7 +94,6 @@ public class DoctorsViewPages extends AppCompatActivity implements OnDoctorSelec
         f.setData(pos, name);
 
         binding.masterViewPager.setCurrentItem(getItem(1), true);
-
 
     }
 

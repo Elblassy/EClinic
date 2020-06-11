@@ -3,11 +3,13 @@ package app.iflatco.eclinic.models;
 public class ChatModel {
 
     private String message;
+    private String image;
     private String userName;
     private String roll;
 
-    public ChatModel(String message, String userName, String roll) {
+    public ChatModel(String message,String image, String userName, String roll) {
         this.message = message;
+        this.image = image;
         this.userName = userName;
         this.roll = roll;
     }
@@ -22,5 +24,9 @@ public class ChatModel {
 
     public String getRoll() {
         return roll;
+    }
+
+    public String getImage() {
+        return image;
     }
 }
